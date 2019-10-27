@@ -1,0 +1,60 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at
+// https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3
+{
+    "name": "Python 3.7.5, Node.js 10.7.0 Container Environment",
+    "context": "..",
+    "dockerFile": "Dockerfile",
+    // Use 'settings' to set *default* container specific settings.json values on container create.
+    // You can edit these settings after create using File > Preferences > Settings > Remote.
+    "settings": {
+        "python.pythonPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintPath": "/usr/local/bin/pylint",
+        "python.linting.pylintEnabled": true,
+        "python.linting.pylintArgs": [
+            "--ignore=C0103,C0111,C1001,R0903"
+        ],
+        // Style Guide for Python Code
+        // https://www.python.org/dev/peps/pep-0008/
+        "python.linting.pep8Enabled": true,
+        "python.linting.pep8Args": [
+            "--ignore=E402,E501,C0111,W0614"
+        ],
+        "terminal.integrated.shell.linux": "/bin/zsh",
+        "terminal.integrated.fontFamily": "Meslo LG S for Powerline",
+        "terminal.integrated.fontSize": 14,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.renderWhitespace": "all",
+        "editor.formatOnPaste": true,
+        "files.trimTrailingWhitespace": true,
+        "files.trimFinalNewlines": true
+    },
+    // Uncomment the next line if you want to publish any ports.
+    // "appPort": [],
+    // Uncomment the next line to run commands after the container is created.
+    // "postCreateCommand": "pip install -r requirements.txt",
+    // Uncomment the next line to use a non-root user. On Linux, this will prevent
+    // new files getting created as root, but you may need to update the USER_UID
+    // and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
+    // "runArgs": [ "-u", "vscode" ],
+    "runArgs": [
+        // SSH keys
+        "-v",
+        "${env:HOME}/.ssh:/root/.ssh:ro",
+        // Forward the Docker socket by mounting it in the container for Docker in Docker
+        // "-v","/var/run/docker.sock:/var/run/docker.sock",
+        // Load env files for AWS CLI
+        "--env-file",
+        ".devcontainer/devcontainer.env"
+    ],
+    // Add the IDs of extensions you want installed when the container is created in the array below.
+    "extensions": [
+        "ms-python.python",
+        "eamodio.gitlens",
+        "mikestead.dotenv",
+        "rubbersheep.gi",
+        "davidanson.vscode-markdownlint",
+        "ms-azuretools.vscode-docker"
+    ]
+}
