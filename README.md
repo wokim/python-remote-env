@@ -11,6 +11,7 @@ This environment is based on the [Developing inside a Container](https://code.vi
 ## Toolchain
 
 For more details, please refer to `.devcontainer/devcontainer.json` and `.devcontainer/Dockerfile` files.
+
 | Name | Version | Name | Version |
 | ------ | ------ | ------ | ------ |
 | python | 3.7.5 | pip | 19.3.1 |
@@ -24,6 +25,7 @@ For more details, please refer to `.devcontainer/devcontainer.json` and `.devcon
 ## Environment variables
 
 For more details, please refer to `.devcontainer/devcontainer.env` file.
+
 | Name | Description |
 | ------ | ------ |
 | AWS_ACCESS_KEY_ID | access key id |
