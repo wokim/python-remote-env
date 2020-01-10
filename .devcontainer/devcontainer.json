@@ -28,7 +28,21 @@
         "editor.renderWhitespace": "all",
         "editor.formatOnPaste": true,
         "files.trimTrailingWhitespace": true,
-        "files.trimFinalNewlines": true
+        "files.trimFinalNewlines": true,
+        "files.exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/node_modules": true,
+            "**/*.d.ts": true,
+            "lib/*.js": true,
+            "test/*.js": false,
+            "bin/*.d.ts": true,
+            "bin/*.js": true,
+            "cdk.out": true
+        }
     },
     // Uncomment the next line if you want to publish any ports.
     // "appPort": [],
@@ -46,7 +60,12 @@
         // "-v","/var/run/docker.sock:/var/run/docker.sock",
         // Load env files for AWS CLI
         "--env-file",
-        ".devcontainer/devcontainer.env"
+        ".devcontainer/devcontainer.env",
+        "-v",
+        "${localWorkspaceFolder}/.devcontainer/.aws:/root/.aws",
+        // docker socket
+        "-v",
+        "/var/run/docker.sock:/var/run/docker.sock"
     ],
     // Add the IDs of extensions you want installed when the container is created in the array below.
     "extensions": [
@@ -55,6 +74,8 @@
         "mikestead.dotenv",
         "rubbersheep.gi",
         "davidanson.vscode-markdownlint",
-        "ms-azuretools.vscode-docker"
+        "ms-azuretools.vscode-docker",
+        "matangover.mypy",
+        "pflannery.vscode-versionlens"
     ]
 }

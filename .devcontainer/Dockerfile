@@ -104,16 +104,17 @@ RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUS
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 COPY .devcontainer/.zshrc /root/.zshrc
 
-# Install AWS CLI 1.16.266 to a system directory, not user directory.
-RUN pip3 install awscli==1.16.266
+# Install AWS CLI to a system directory, not user directory.
+RUN apt-get update && apt-get install -y groff less
+RUN pip3 install awscli==1.16.292
+RUN pip3 install awslogs==0.11.0
 
-# Install pipenv to a system directory, not user directory.
-RUN pip3 install pipenv==2018.11.26
-
-# Install pylint to a system directory, not user directory.
-RUN pip3 --disable-pip-version-check --no-cache-dir install pylint==2.4.3
+# Install pylint and autopep8 to a system directory, not user directory.
+RUN pip3 --disable-pip-version-check --no-cache-dir install pylint==2.4.3 autopep8==1.4.4
 
 # Install AWS Cloud Development Kit.
-RUN npm install -g aws-cdk@1.14.0
+RUN npm install -g aws-cdk@1.18.0 serverless@1.60.4
+
+ENV PATH="/root/.local/bin:${PATH}"
 
 WORKDIR /workspaces/

@@ -26,12 +26,6 @@ For more details, please refer to `.devcontainer/devcontainer.json` and `.devcon
 
 For more details, please refer to `.devcontainer/devcontainer.env` file.
 
-| Name | Description |
-| ------ | ------ |
-| AWS_ACCESS_KEY_ID | access key id |
-| AWS_SECRET_ACCESS_KEY | secret access key |
-| AWS_DEFAULT_REGION | default region |
-
 ## Prerequisites
 
 Python Remote Environment requires [Docker Desktop 2.0+](https://hub.docker.com/?overlay=onboarding) or Docker CE 18.06+
@@ -56,11 +50,10 @@ rm -rf fonts
 ```sh
 git config --global user.name "name"
 git config --global user.email account@yourdomain.com
-git config --global credential.helper osxkeychain
 
 $ git config --list
 user.name=Kim, Wonshik
-user.email=wokim@mycelebs.com
+user.email=wonshikkim.kr@gmail.com
 credential.helper=osxkeychain
 ```
 
@@ -69,3 +62,10 @@ credential.helper=osxkeychain
 By including `devcontainer.json` files in your repository, anyone that opens a local copy of your repo in VS Code will be automatically prompted to reopen the folder in a container, provided they have the Remote - Containers extension installed. You can also try it with `Remote-Containers: Reopen Folder in Container` in the Command Palette (`F1`).
 
 ![Reopen in Container](https://code.visualstudio.com/assets/docs/remote/containers/dev-container-reopen-prompt.png)
+
+## Example
+
+```sh
+pip install -t vendor -r requirements.txt
+
+```
