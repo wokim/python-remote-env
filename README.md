@@ -14,12 +14,12 @@ For more details, please refer to `.devcontainer/devcontainer.json` and `.devcon
 
 | Name | Version | Name | Version |
 | ------ | ------ | ------ | ------ |
-| python | 3.7.5 | pip | 19.3.1 |
-| pipenv | 2018.11.26 | pylint | 2.4.3 |
-| node.js | 10.17.0 | npm | 6.11.3 |
-| yarn | 1.19.1 | docker | 19.03.4 |
-| containerd | 1.2.10 | docker-compose | 1.24.1 |
-| awscli | 1.16.266 | aws-cdk | 1.14.0 |
+| python | 3.8.1 | pip | 19.3.1 |
+| autopep8 | 1.5 | pylint | 2.4.4 |
+| node.js | 10.17.0 | npm | 6.13.4 |
+| yarn | 1.21.1 | docker | 19.03.5 |
+| containerd | 1.2.10 | docker-compose | 1.25.0 |
+| awscli | 1.17.6 | aws-cdk | 1.21.1 |
 | git | 2.20.1 | debian | 10-buster |
 
 ## Environment variables
@@ -67,5 +67,6 @@ By including `devcontainer.json` files in your repository, anyone that opens a l
 
 ```sh
 pip install -t vendor -r requirements.txt
+python ./src/hello
 
 ```

@@ -1,18 +1,17 @@
-# FROM python:3.6.5-stretch
-# NOTE: AWS Lambda now supports Node.js 10.x or Python 3.7
+# NOTE: Please check the version supported by AWS Lambda
 # https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
-FROM python:3.7.5-buster
+FROM python:3.8.1-buster
 
 # Configure apt and install packages
 RUN apt-get update && \
     apt-get install -y zsh vim build-essential ssh git apt-utils procps lsb-release
 
 # Install Node.js
-# https://github.com/nodejs/docker-node/blob/f5875531604b4b3b9fbc36437182781c3655c8ae/10/buster/Dockerfile
+# https://github.com/nodejs/docker-node/blob/cd046b99024274af8a782bc7fb722a89f65ecfdc/12/buster/Dockerfile
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-ENV NODE_VERSION 10.17.0
+ENV NODE_VERSION 12.14.1
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \
@@ -51,7 +50,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-ENV YARN_VERSION 1.19.1
+ENV YARN_VERSION 1.21.1
 
 RUN set -ex \
   && for key in \
@@ -82,7 +81,7 @@ RUN apt-get update \
    $(lsb_release -cs) \
    stable"
 
-ENV DOCKER_CE_VERSION 5:19.03.4~3-0~debian-buster
+ENV DOCKER_CE_VERSION 5:19.03.5~3-0~debian-buster
 ENV CONTAINERD_VERSION 1.2.10-3
 
 RUN apt-get update \
@@ -92,7 +91,8 @@ RUN apt-get update \
   && apt-get install -y docker-ce=${DOCKER_CE_VERSION} docker-ce-cli=$DOCKER_CE_VERSION containerd.io=$CONTAINERD_VERSION
 
 # Install docker-compose
-ENV DOCKER_COMPOSE_VERSION 1.24.1
+# https://docs.docker.com/compose/install/
+ENV DOCKER_COMPOSE_VERSION 1.25.0
 
 RUN curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
   && chmod +x /usr/local/bin/docker-compose
@@ -106,14 +106,14 @@ COPY .devcontainer/.zshrc /root/.zshrc
 
 # Install AWS CLI to a system directory, not user directory.
 RUN apt-get update && apt-get install -y groff less
-RUN pip3 install awscli==1.16.292
+RUN pip3 install awscli==1.17.6
 RUN pip3 install awslogs==0.11.0
 
 # Install pylint and autopep8 to a system directory, not user directory.
-RUN pip3 --disable-pip-version-check --no-cache-dir install pylint==2.4.3 autopep8==1.4.4
+RUN pip3 --disable-pip-version-check --no-cache-dir install pylint==2.4.4 autopep8==1.5
 
 # Install AWS Cloud Development Kit.
-RUN npm install -g aws-cdk@1.18.0 serverless@1.60.4
+RUN npm install -g aws-cdk@1.21.1 serverless@1.61.2
 
 ENV PATH="/root/.local/bin:${PATH}"
 
